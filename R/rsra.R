@@ -55,5 +55,5 @@ rsra <- function(idList, outdir = getwd(), progress = TRUE, location = c("NCBI",
     }
   }
 
-  cli::cli_alert_info("Total input {col_blue(length(idList))} cases, {col_green(success))} downloaded successfully")
+  cli::cli_alert_info("Total input {col_blue(length(idList))} cases, {col_green(success)} downloaded successfully")
 }
