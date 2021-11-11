@@ -11,9 +11,10 @@
 rsra <- function(idList, outdir = getwd(), progress = FALSE, location = c("NCBI", "AWS")) {
   stopifnot(length(idList) > 0)
 
-  cli::cli_alert_info("Download server set to {location}")
   location <- match.arg(location)
   if (!dir.exists(outdir)) dir.create(outdir, recursive = TRUE)
+
+  cli::cli_alert_info("Download server set to {location}")
 
   if (file.exists(idList[1])) {
     cli::cli_alert_info("Treat input {.file {idList}} as file(s)")
@@ -27,7 +28,7 @@ rsra <- function(idList, outdir = getwd(), progress = FALSE, location = c("NCBI"
   }
   idList <- setdiff(idList, "")
 
-  cli::cli_alert_success("{length(idList) cases detected}")
+  cli::cli_alert_success("{length(idList)} cases detected")
 
   success <- 0L
   for (i in idList) {
