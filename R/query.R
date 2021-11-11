@@ -28,10 +28,13 @@ query <- function(id, location = c("NCBI", "AWS")) {
     return(FALSE)
   }
 
+  cli::cli_alert_info("Case info in NCBI:")
+  print(x)
   link <- x$Name[x$Location == location]
 
   if (length(link) != 1) {
     return(FALSE)
   }
+  cli::cli_alert_success("Download link obtained for specified server")
   link
 }

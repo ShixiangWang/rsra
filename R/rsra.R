@@ -41,7 +41,7 @@ rsra <- function(idList, outdir = getwd(), progress = FALSE, location = c("NCBI"
       cli::cli_alert("Downloading file {.file {fn}} from {.url {rv}}")
 
       args <- c("-c", rv, "-O", fn, "-q")
-      if (progress) args <- c(args, "--show-progress")
+      if (progress) args <- args[-5]
 
       status <- system2("wget", args)
       if (status != 0) {

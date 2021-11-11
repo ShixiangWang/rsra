@@ -1,7 +1,7 @@
 Type: Package
 Package: rsra
 Title: Query and Download SRA Files from NCBI
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     person(given = "Shixiang",
            family = "Wang",
