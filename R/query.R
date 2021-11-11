@@ -1,14 +1,14 @@
 # query("SRR8657217")
-query = function(id, location = c("NCBI", "AWS")) {
-  location = match.arg(location)
+query <- function(id, location = c("NCBI", "AWS")) {
+  location <- match.arg(location)
 
-  x = tryCatch(
+  x <- tryCatch(
     {
       rvest::read_html(glue::glue("https://trace.ncbi.nlm.nih.gov/Traces/sra/?run={id}")) %>%
         rvest::html_table()
     },
     error = function(e) {
-      # warning here
+      cli::cli_warn("Cannot query information for case {.field {id}}")
       FALSE
     }
   )
@@ -17,18 +17,21 @@ query = function(id, location = c("NCBI", "AWS")) {
     return(FALSE)
   }
 
-  flag = sapply(x, function(x) {
+  flag <- sapply(x, function(x) {
     all(c("Size", "Location", "Name", "Free Egress", "Access Type") %in% colnames(x))
   })
 
-  x = x[flag]
+  x <- x[flag]
   if (sum(flag) > 0) {
-    x = x[[1]]
-  } else return(FALSE)
+    x <- x[[1]]
+  } else {
+    return(FALSE)
+  }
 
-  link = x$Name[x$Location == location]
+  link <- x$Name[x$Location == location]
 
-  if (length(link) != 1) return(FALSE)
+  if (length(link) != 1) {
+    return(FALSE)
+  }
   link
 }
-
