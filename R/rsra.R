@@ -8,7 +8,7 @@
 #' @return Nothing
 #' @export
 #' @importFrom cli col_green col_blue
-rsra <- function(idList, outdir = getwd(), progress = FALSE, location = c("NCBI", "AWS")) {
+rsra <- function(idList, outdir = getwd(), progress = TRUE, location = c("NCBI", "AWS")) {
   stopifnot(length(idList) > 0)
 
   location <- match.arg(location)
