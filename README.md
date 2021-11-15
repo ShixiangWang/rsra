@@ -42,6 +42,10 @@ rsra("SRR8615934")
 Rscript -e 'rsra::rsra("SRR8615934")'
 ```
 
+## Similar projects
+
+- [get-ena-seq](https://github.com/wangshun1121/get-ena-seq)
+
 ## LICENSE
 
 GPL-3
