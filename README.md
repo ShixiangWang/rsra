@@ -46,6 +46,11 @@ Rscript -e 'rsra::rsra("SRR8615934")'
 
 - [get-ena-seq](https://github.com/wangshun1121/get-ena-seq)
 
+
+## Related tool
+
+- [ffq - A tool to find sequencing data and metadata from public databases](https://github.com/pachterlab/ffq)
+
 ## LICENSE
 
 GPL-3
