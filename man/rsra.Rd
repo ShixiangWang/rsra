@@ -4,10 +4,19 @@
 \alias{rsra}
 \title{Query and download SRA files from NCBI}
 \usage{
-rsra(idList, outdir = getwd(), progress = TRUE, location = c("AWS", "NCBI"))
+rsra(
+  idList,
+  prefetch = NULL,
+  outdir = getwd(),
+  progress = TRUE,
+  location = c("AWS", "NCBI"),
+  opts = "-r yes -C yes"
+)
 }
 \arguments{
 \item{idList}{a list of cases to download.}
+
+\item{prefetch}{if not \code{NULL}, should be the path to the prefetch program.}
 
 \item{outdir}{output directory, default is working directory.}
 
@@ -15,6 +24,8 @@ rsra(idList, outdir = getwd(), progress = TRUE, location = c("AWS", "NCBI"))
 
 \item{location}{one of "AWS" or "NCBI" for download server.
 "GCAP" is not available due to its limit.}
+
+\item{opts}{options work with \code{prefetch} (expects \code{-p}) when \code{prefetch} is not \code{NULL}.}
 }
 \value{
 Nothing

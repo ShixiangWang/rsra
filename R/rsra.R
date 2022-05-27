@@ -1,21 +1,25 @@
 #' Query and download SRA files from NCBI
 #'
 #' @param idList a list of cases to download.
+#' @param prefetch if not `NULL`, should be the path to the prefetch program.
 #' @param outdir output directory, default is working directory.
 #' @param progress if `TRUE`, show 'wget' download progress.
 #' @param location one of "AWS" or "NCBI" for download server.
 #' "GCAP" is not available due to its limit.
+#' @param opts options work with `prefetch` (expects `-p`) when `prefetch` is not `NULL`.
 #'
 #' @return Nothing
 #' @export
 #' @importFrom cli col_green col_blue
-rsra <- function(idList, outdir = getwd(), progress = TRUE, location = c("AWS", "NCBI")) {
+rsra <- function(idList, prefetch = NULL, outdir = getwd(),
+                 progress = TRUE, location = c("AWS", "NCBI"),
+                 opts = "-r yes -C yes") {
   stopifnot(length(idList) > 0)
 
   location <- location[1]
   if (!dir.exists(outdir)) dir.create(outdir, recursive = TRUE)
 
-  cli::cli_alert_info("Download server set to {location}")
+  if (is.null(prefetch)) cli::cli_alert_info("Download server set to {location}")
 
   if (file.exists(idList[1])) {
     cli::cli_alert_info("Treat input {.file {idList}} as file(s)")
@@ -30,6 +34,19 @@ rsra <- function(idList, outdir = getwd(), progress = TRUE, location = c("AWS", 
   idList <- setdiff(idList, "")
 
   cli::cli_alert_success("{length(idList)} cases detected")
+
+  if (!is.null(prefetch)) {
+    cli::cli_alert_info("prefetch is set to {prefetch}, use CLI to download")
+    # if (!file.exists(prefetch)) {
+    #   cli::cli_alert_danger("the program not found")
+    #   return(NULL)
+    # }
+    if (progress) opts <- paste0(opts, " ", "-p")
+    cli <- sprintf("%s %s -O %s %s", prefetch, opts, outdir, paste(idList, collapse = " "))
+    cli::cli_alert_info("download data files with command `{cli}`")
+    system(cli)
+    return(NULL)
+  }
 
   success <- 0L
   for (i in idList) {
