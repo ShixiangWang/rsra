@@ -3,15 +3,16 @@
 #' @param idList a list of cases to download.
 #' @param outdir output directory, default is working directory.
 #' @param progress if `TRUE`, show 'wget' download progress.
-#' @param location one of "NCBI" or "AWS" for download server.
+#' @param location one of "AWS" or "NCBI" for download server.
+#' "GCAP" is not available due to its limit.
 #'
 #' @return Nothing
 #' @export
 #' @importFrom cli col_green col_blue
-rsra <- function(idList, outdir = getwd(), progress = TRUE, location = c("NCBI", "AWS")) {
+rsra <- function(idList, outdir = getwd(), progress = TRUE, location = c("AWS", "NCBI")) {
   stopifnot(length(idList) > 0)
 
-  location <- match.arg(location)
+  location <- location[1]
   if (!dir.exists(outdir)) dir.create(outdir, recursive = TRUE)
 
   cli::cli_alert_info("Download server set to {location}")

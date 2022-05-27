@@ -4,7 +4,7 @@
 \alias{rsra}
 \title{Query and download SRA files from NCBI}
 \usage{
-rsra(idList, outdir = getwd(), progress = FALSE, location = c("NCBI", "AWS"))
+rsra(idList, outdir = getwd(), progress = TRUE, location = c("AWS", "NCBI"))
 }
 \arguments{
 \item{idList}{a list of cases to download.}
@@ -13,7 +13,8 @@ rsra(idList, outdir = getwd(), progress = FALSE, location = c("NCBI", "AWS"))
 
 \item{progress}{if \code{TRUE}, show 'wget' download progress.}
 
-\item{location}{one of "NCBI" or "AWS" for download server.}
+\item{location}{one of "AWS" or "NCBI" for download server.
+"GCAP" is not available due to its limit.}
 }
 \value{
 Nothing
